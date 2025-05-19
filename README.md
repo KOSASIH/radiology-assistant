@@ -22,7 +22,7 @@ A supportive tool for radiologists that enhances the interpretation of brain MRI
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/radiology-assistant.git
+git clone https://github.com/KOSASIH/radiology-assistant.git
 cd radiology-assistant
 
 # Install dependencies
