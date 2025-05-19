@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radiology Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 2rem;
+            background-color: #f8f9fa;
+        }
+        .header {
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #343a40;
+        }
+        .card {
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .sample-image {
+            height: 200px;
+            object-fit: contain;
+            background-color: #f1f1f1;
+        }
+        .upload-area {
+            border: 2px dashed #dee2e6;
+            padding: 2rem;
+            text-align: center;
+            background-color: white;
+            border-radius: 0.5rem;
+        }
+        .footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Radiology Assistant</h1>
+            <p class="lead">A supportive tool for radiologists that enhances the interpretation of brain MRI scans</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Upload Your MRI Scan</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="/analyze" method="post" enctype="multipart/form-data">
+                            <div class="upload-area">
+                                <p>Drag and drop your MRI scan image here or click to browse</p>
+                                <input type="file" name="file" class="form-control" accept=".png,.jpg,.jpeg,.gif">
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3 w-100">Analyze</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Sample MRI Scans</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% for sample in samples %}
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <img src="{{ url_for('sample_file', filename=sample) }}" class="sample-image card-img-top" alt="Sample MRI">
+                                    <div class="card-body p-2">
+                                        <a href="{{ url_for('analyze_sample', filename=sample) }}" class="btn btn-sm btn-outline-primary w-100">Analyze</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Radiology Assistant &copy; 2025 - A tool for enhancing MRI scan interpretation</p>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
